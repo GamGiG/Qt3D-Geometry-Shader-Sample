@@ -5,15 +5,17 @@
 #include <Qt3DRender/QTechnique>
 #include <Qt3DRender/QGraphicsApiFilter>
 #include <Qt3DRender/QFilterKey>
+#include <Qt3DRender/QAlphaTest>
+#include <Qt3DRender/QBlendEquation>
 
 #include <QStringLiteral>
 #include <QUrl>
 
-class SphereGeometryEffect : public Qt3DRender::QEffect
+class PlaneGeometryEffect : public Qt3DRender::QEffect
 {
     Q_OBJECT
 public:
-    SphereGeometryEffect(Qt3DCore::QNode* parent);
+    PlaneGeometryEffect(Qt3DCore::QNode* parent);
 };
 
 #endif // SPHEREGEOMETRYEFFECT_H

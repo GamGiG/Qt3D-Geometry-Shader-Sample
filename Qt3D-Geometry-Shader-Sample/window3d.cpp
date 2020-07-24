@@ -7,6 +7,7 @@ Window3D::Window3D()
     initRootEntity();
     initScene();
     initCamera();
+    initController();
 }
 
 Qt3DRender::QCamera* Window3D::getCamera()
@@ -53,8 +54,11 @@ void Window3D::initScene()
     sceneEntity = new Qt3DCore::QEntity(rootEntity);
 
     initLight();
-    //createSphere(QVector3D(0.0f, 0.0f, 0.0f));
-    createCustomSphere(QVector3D(0.0f, 0.0f, 0.0f));
+    createBigPlane();
+//    createCustomPlane(QVector3D(0.0f, 0.0f, 0.0f));
+
+//    createRandomCustomsPlanes(100);
+    createRandomArrayCustomPlanes(100000);
 
 }
 
@@ -86,14 +90,68 @@ void Window3D::createSphere(QVector3D position)
     sphereEntity->addComponent(transform);
 }
 
-void Window3D::createCustomSphere(QVector3D position)
+void Window3D::createCustomPlane(QVector3D position)
 {
-    CustomSphere* sphereEntity = new CustomSphere(QVector3D(0.0f, 0.0f, 0.0f), sceneEntity);
+    CustomPlane* sphereEntity = new CustomPlane(QVector3D(0.0f, 0.0f, 0.0f), sceneEntity);
 
     Qt3DCore::QTransform* transform = new Qt3DCore::QTransform(sphereEntity);
     transform->setTranslation(position);
 
-    SphereMaterial* material = new SphereMaterial(sphereEntity);
-    sphereEntity->addComponent(material);
+    if (PlaneMaterial::Instance == nullptr) {
+        PlaneMaterial* material = new PlaneMaterial(nullptr);
+        sphereEntity->addComponent(material);
+    } else {
+        sphereEntity->addComponent(PlaneMaterial::Instance);
+    }
+
     sphereEntity->addComponent(transform);
+
+}
+
+void Window3D::createBigPlane()
+{
+    Qt3DCore::QEntity* entityPlane = new Qt3DCore::QEntity(sceneEntity);
+    Qt3DExtras::QPlaneMesh* meshPlane = new Qt3DExtras::QPlaneMesh(entityPlane);
+    meshPlane->setWidth(100.0);
+    meshPlane->setHeight(100.0);
+    meshPlane->setMeshResolution(QSize(2, 2));
+
+    Qt3DExtras::QPhongMaterial* phongMaterial = new Qt3DExtras::QPhongMaterial(entityPlane);
+    phongMaterial->setDiffuse(QColor::fromRgbF(0.3f, 0.2f, 0.1f));
+    phongMaterial->setAmbient(QColor::fromRgbF(0.3f, 0.2f, 0.1f));
+
+    entityPlane->addComponent(meshPlane);
+    entityPlane->addComponent(phongMaterial);
+}
+
+void Window3D::createRandomCustomsPlanes(int count)
+{
+    for (int i = 0; i < count; i++) {
+        double x = 100.0 * (QRandomGenerator::global()->generateDouble() - 0.5);
+        double y = 100.0 * (QRandomGenerator::global()->generateDouble() - 0.5);
+        createCustomPlane(QVector3D(x, 0, y));
+    }
+}
+
+void Window3D::createRandomArrayCustomPlanes(int count)
+{
+    CustomPlanes* customPlanes = new CustomPlanes(count, sceneEntity);
+
+    if (PlaneMaterial::Instance == nullptr) {
+        PlaneMaterial* material = new PlaneMaterial(nullptr);
+        customPlanes->addComponent(material);
+    } else {
+        customPlanes->addComponent(PlaneMaterial::Instance);
+    }
+
+    Qt3DCore::QTransform* transform = new Qt3DCore::QTransform(customPlanes);
+    transform->setTranslation(QVector3D(0.0, 0.0, 0.0));
+
+    customPlanes->addComponent(transform);
+}
+
+void Window3D::initController()
+{
+    Qt3DExtras::QOrbitCameraController* controller = new Qt3DExtras::QOrbitCameraController(rootEntity);
+    controller->setCamera(defaultCamera);
 }

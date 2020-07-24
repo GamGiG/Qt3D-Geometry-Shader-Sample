@@ -1,13 +1,13 @@
-#include "customsphere.h"
+#include "customplane.h"
 
-CustomSphere::CustomSphere(QVector3D position, Qt3DCore::QNode *parent)
+CustomPlane::CustomPlane(QVector3D position, Qt3DCore::QNode *parent)
     : Qt3DCore::QEntity(parent)
     , position(position)
 {
     initGeometry(position);
 }
 
-void CustomSphere::initGeometry(QVector3D position)
+void CustomPlane::initGeometry(QVector3D position)
 {
     QByteArray pointsData;
     pointsData.resize(3 * sizeof(float));

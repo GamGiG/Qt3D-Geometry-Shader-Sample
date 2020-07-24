@@ -1,7 +1,13 @@
 <RCC>
     <qresource prefix="/Shaders">
-        <file>Shaders/generate_sphere.vert</file>
-        <file>Shaders/generate_sphere.frag</file>
-        <file>Shaders/generate_sphere.glsl</file>
+        <file>Shaders/generate_forest.frag</file>
+        <file>Shaders/generate_forest.glsl</file>
+        <file>Shaders/generate_forest.vert</file>
+        <file>Shaders/generate_forest_2.frag</file>
+        <file>Shaders/generate_forest_2.glsl</file>
+        <file>Shaders/generate_forest_2.vert</file>
+    </qresource>
+    <qresource prefix="/Images">
+        <file>Images/texture.png</file>
     </qresource>
 </RCC>

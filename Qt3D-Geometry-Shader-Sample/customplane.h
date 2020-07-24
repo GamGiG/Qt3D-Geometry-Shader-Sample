@@ -10,15 +10,14 @@
 #include <Qt3DRender/QBuffer>
 #include <Qt3DRender/QAttribute>
 
-class CustomSphere :  public Qt3DCore::QEntity
+class CustomPlane :  public Qt3DCore::QEntity
 {
     Q_OBJECT
 public:
-    CustomSphere(QVector3D position, Qt3DCore::QNode* parent);
+    CustomPlane(QVector3D position, Qt3DCore::QNode* parent);
 
 private:
     QVector3D position;
-
     void initGeometry(QVector3D position);
 };
 

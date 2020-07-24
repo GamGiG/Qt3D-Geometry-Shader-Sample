@@ -27,16 +27,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     window3d.cpp \
-    customsphere.cpp \
-    spheregeometryeffect.cpp \
-    spherematerial.cpp
+    customplane.cpp \
+    planematerial.cpp \
+    planegeometryeffect.cpp \
+    customplanes.cpp
 
 HEADERS += \
         mainwindow.h \
     window3d.h \
-    customsphere.h \
-    spheregeometryeffect.h \
-    spherematerial.h
+    customplane.h \
+    planegeometryeffect.h \
+    planematerial.h \
+    customplanes.h
 
 FORMS += \
         mainwindow.ui

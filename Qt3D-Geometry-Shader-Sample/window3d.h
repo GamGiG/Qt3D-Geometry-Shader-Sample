@@ -1,19 +1,23 @@
 #ifndef WINDOW3D_H
 #define WINDOW3D_H
 
-#include <Qt3DCore/QTransform>
+#include <QRandomGenerator>
 
-#include <Qt3DExtras/Qt3DWindow>
-#include <Qt3DExtras/QSphereMesh>
+#include <Qt3DCore/QTransform>
 
 #include <Qt3DRender/QCamera>
 #include <Qt3DRender/QDirectionalLight>
 
 #include <Qt3DExtras/QForwardRenderer>
 #include <Qt3DExtras/QPhongMaterial>
+#include <Qt3DExtras/QOrbitCameraController>
+#include <Qt3DExtras/Qt3DWindow>
+#include <Qt3DExtras/QSphereMesh>
+#include <Qt3DExtras/QPlaneMesh>
 
-#include "spherematerial.h"
-#include "customsphere.h"
+#include "planematerial.h"
+#include "customplane.h"
+#include "customplanes.h"
 
 class Window3D : public Qt3DExtras::Qt3DWindow
 {
@@ -33,10 +37,15 @@ private:
     void initRootEntity();
     void initClearColor();
     void initLight();
+    void initController();
 
     void initScene();
+
+    void createBigPlane();
     void createSphere(QVector3D position);
-    void createCustomSphere(QVector3D position);
+    void createCustomPlane(QVector3D position);
+    void createRandomCustomsPlanes(int count = 10);
+    void createRandomArrayCustomPlanes(int count = 10);
 };
 
 #endif // WINDOW3D_H
