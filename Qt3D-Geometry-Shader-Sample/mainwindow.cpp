@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    Window3D* window = new Window3D();
+    ui->verticalLayout->addWidget(QWidget::createWindowContainer(window));
 }
 
 MainWindow::~MainWindow()

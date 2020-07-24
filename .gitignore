@@ -1,2 +1,15 @@
 
 *.user
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/ui_mainwindow.h
+*.Release
+*.Debug
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/Makefile
+*.obj
+*.stash
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_mainwindow.cpp
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_predefs.h
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_window3d.cpp
+*.exe
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/Qt3D-Geometry-Shader-Sample.ilk
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/Qt3D-Geometry-Shader-Sample.pdb
+*.pdb
