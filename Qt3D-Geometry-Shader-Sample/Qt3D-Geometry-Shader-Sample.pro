@@ -26,11 +26,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    window3d.cpp
+    window3d.cpp \
+    customsphere.cpp \
+    spheregeometryeffect.cpp \
+    spherematerial.cpp
 
 HEADERS += \
         mainwindow.h \
-    window3d.h
+    window3d.h \
+    customsphere.h \
+    spheregeometryeffect.h \
+    spherematerial.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    shaders.qrc

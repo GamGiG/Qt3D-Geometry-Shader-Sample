@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Shaders">
+        <file>Shaders/generate_sphere.vert</file>
+        <file>Shaders/generate_sphere.frag</file>
+        <file>Shaders/generate_sphere.glsl</file>
+    </qresource>
+</RCC>
