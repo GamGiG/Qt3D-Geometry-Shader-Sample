@@ -14,3 +14,12 @@ build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/
 build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/Qt3D-Geometry-Shader-Sample.pdb
 *.pdb
 *.autosave
+*.png
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_planematerial.cpp
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_planegeometryeffect.cpp
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_customplanes.cpp
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/moc_customplane.cpp
+build-Qt3D-Geometry-Shader-Sample-Desktop_Qt_5_10_1_MSVC2015_64bit2-Debug/debug/qrc_shaders.cpp
+*.png
+*.png
+Qt3D-Geometry-Shader-Sample/Images/texture_0.png

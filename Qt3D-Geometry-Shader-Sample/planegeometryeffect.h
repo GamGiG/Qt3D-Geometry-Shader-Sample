@@ -6,7 +6,6 @@
 #include <Qt3DRender/QGraphicsApiFilter>
 #include <Qt3DRender/QFilterKey>
 #include <Qt3DRender/QAlphaTest>
-#include <Qt3DRender/QBlendEquation>
 
 #include <QStringLiteral>
 #include <QUrl>

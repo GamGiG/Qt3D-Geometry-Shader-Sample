@@ -21,7 +21,7 @@ void CustomPlanes::initGeometry()
         double y = 100.0 * (QRandomGenerator::global()->generateDouble() - 0.5);
 
         rawPointsData[i * 3 + 0] = (float)x;
-        rawPointsData[i * 3 + 1] = 0.0f;
+        rawPointsData[i * 3 + 1] = 0.1f;
         rawPointsData[i * 3 + 2] = (float)y;
     }
 

@@ -9,5 +9,6 @@
     </qresource>
     <qresource prefix="/Images">
         <file>Images/texture.png</file>
+        <file>Images/texture_0.png</file>
     </qresource>
 </RCC>

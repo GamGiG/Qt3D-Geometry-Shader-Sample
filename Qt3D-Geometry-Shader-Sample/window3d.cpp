@@ -46,7 +46,7 @@ void Window3D::initRootEntity()
 
 void Window3D::initClearColor()
 {
-    this->defaultFrameGraph()->setClearColor(QColor::fromRgbF(0.1f, 0.2f, 0.3f));
+    this->defaultFrameGraph()->setClearColor(QColor::fromRgbF(0.1f, 0.2f, 0.3f, 0.0f));
 }
 
 void Window3D::initScene()
@@ -55,9 +55,6 @@ void Window3D::initScene()
 
     initLight();
     createBigPlane();
-//    createCustomPlane(QVector3D(0.0f, 0.0f, 0.0f));
-
-//    createRandomCustomsPlanes(100);
     createRandomArrayCustomPlanes(100000);
 
 }

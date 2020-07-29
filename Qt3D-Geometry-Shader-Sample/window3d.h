@@ -7,6 +7,7 @@
 
 #include <Qt3DRender/QCamera>
 #include <Qt3DRender/QDirectionalLight>
+#include <Qt3DRender/QSortPolicy>
 
 #include <Qt3DExtras/QForwardRenderer>
 #include <Qt3DExtras/QPhongMaterial>
