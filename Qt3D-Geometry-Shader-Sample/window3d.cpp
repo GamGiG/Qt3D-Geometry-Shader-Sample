@@ -56,7 +56,7 @@ void Window3D::initScene()
     initLight();
     createBigPlane();
     createRandomArrayCustomPlanes(100);
-    createRandomArrayCustomWalls(100000);
+    createRandomArrayCustomWalls(10000);
 }
 
 void Window3D::initLight()

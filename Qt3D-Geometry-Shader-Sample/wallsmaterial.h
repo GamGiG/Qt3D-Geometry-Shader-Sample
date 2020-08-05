@@ -15,6 +15,7 @@ class WallsMaterial : public Qt3DRender::QMaterial
     Q_OBJECT
 public:
     static WallsMaterial* Instance;
+    static WallsGeometryEffect* Effect;
 
     WallsMaterial(Qt3DCore::QNode* parent);
 };

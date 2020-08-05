@@ -43,10 +43,12 @@ void CustomWalls::initCustomRandomWalls(int count)
         qDebug() << QString("%1 из %2").arg(i).arg(count);
         QVector2D center = generateRandomVector2D();
         QVector2D wh = generateRandomVector2D(0.5f) + QVector2D(0.6f, 0.6f);
-        CustomWall* customWall0 = new CustomWall(QVector2D(center.x() - wh.x(), center.y() - wh.y()), QVector2D(center.x() - wh.x(), center.y() + wh.y()), generateRandomFloat(), this);
-        CustomWall* customWall1 = new CustomWall(QVector2D(center.x() - wh.x(), center.y() + wh.y()), QVector2D(center.x() + wh.x(), center.y() + wh.y()), generateRandomFloat(), this);
-        CustomWall* customWall2 = new CustomWall(QVector2D(center.x() + wh.x(), center.y() + wh.y()), QVector2D(center.x() + wh.x(), center.y() - wh.y()), generateRandomFloat(), this);
-        CustomWall* customWall3 = new CustomWall(QVector2D(center.x() + wh.x(), center.y() - wh.y()), QVector2D(center.x() - wh.x(), center.y() - wh.y()), generateRandomFloat(), this);
+        float h = generateRandomFloat(5.0f);
+
+        CustomWall* customWall0 = new CustomWall(QVector2D(center.x() - wh.x(), center.y() - wh.y()), QVector2D(center.x() - wh.x(), center.y() + wh.y()), h, this);
+        CustomWall* customWall1 = new CustomWall(QVector2D(center.x() - wh.x(), center.y() + wh.y()), QVector2D(center.x() + wh.x(), center.y() + wh.y()), h, this);
+        CustomWall* customWall2 = new CustomWall(QVector2D(center.x() + wh.x(), center.y() + wh.y()), QVector2D(center.x() + wh.x(), center.y() - wh.y()), h, this);
+        CustomWall* customWall3 = new CustomWall(QVector2D(center.x() + wh.x(), center.y() - wh.y()), QVector2D(center.x() - wh.x(), center.y() - wh.y()), h, this);
 
         customWalls.insert(customWall0->getUUID(), customWall0);
         customWalls.insert(customWall1->getUUID(), customWall1);
@@ -58,29 +60,33 @@ void CustomWalls::initCustomRandomWalls(int count)
 void CustomWalls::initGeometry()
 {
     int count = customWalls.count();
-    int count_floats_in_wall = 3 * 2;
+    int count_floats_in_wall = (3 + 1) * 2;
     int count_of_floats = count * count_floats_in_wall;
 
+    //POINTS
     QByteArray pointsData;
-    pointsData.resize(count_of_floats * sizeof(float));
+    pointsData.resize((count_of_floats) * sizeof(float));
 
     float* rawPointsData = reinterpret_cast<float *>(pointsData.data());
 
     QList<QString> keys = customWalls.keys();
     for (int i = 0; i < count; i++) {
-        QString uuid = keys[i];
-        CustomWall* customWall = customWalls[uuid];
+        CustomWall* customWall = customWalls[keys[i]];
 
         rawPointsData[i * count_floats_in_wall + 0] = customWall->getP0().x();
         rawPointsData[i * count_floats_in_wall + 1] = 0.0f;
         rawPointsData[i * count_floats_in_wall + 2] = customWall->getP0().y();
-        rawPointsData[i * count_floats_in_wall + 3] = customWall->getP1().x();
-        rawPointsData[i * count_floats_in_wall + 4] = 0.0f;
-        rawPointsData[i * count_floats_in_wall + 5] = customWall->getP1().y();
+        rawPointsData[i * count_floats_in_wall + 3] = customWall->getH();
+
+        rawPointsData[i * count_floats_in_wall + 4] = customWall->getP1().x();
+        rawPointsData[i * count_floats_in_wall + 5] = 0.0f;
+        rawPointsData[i * count_floats_in_wall + 6] = customWall->getP1().y();
+        rawPointsData[i * count_floats_in_wall + 7] = customWall->getH();
 
         qDebug() << QString("RAW %1 из %2").arg(i).arg(count);
     }
 
+    //INDEX
     QByteArray indexData;
     indexData.resize(count * 2 * sizeof(uint));
 
@@ -108,9 +114,20 @@ void CustomWalls::initGeometry()
     positionAttribute->setDataType(Qt3DRender::QAttribute::Float);
     positionAttribute->setDataSize(3);
     positionAttribute->setByteOffset(0);
-    positionAttribute->setByteStride(3 * sizeof(float));
-    positionAttribute->setCount(count);
+    positionAttribute->setByteStride(4 * sizeof(float));
+    positionAttribute->setCount(count * 2);
     positionAttribute->setName(Qt3DRender::QAttribute::defaultPositionAttributeName());
+
+    //атрибут высот
+    Qt3DRender::QAttribute *heightAttribute = new Qt3DRender::QAttribute();
+    heightAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
+    heightAttribute->setBuffer(vertexBuffer);
+    heightAttribute->setDataType(Qt3DRender::QAttribute::Float);
+    heightAttribute->setDataSize(1);
+    heightAttribute->setByteOffset(3 * sizeof(float));
+    heightAttribute->setByteStride(4 * sizeof(float));
+    heightAttribute->setCount(count * 2);
+    heightAttribute->setName("height");
 
     //атрибут индексов
     Qt3DRender::QAttribute *indexAttribute = new Qt3DRender::QAttribute();
@@ -124,6 +141,7 @@ void CustomWalls::initGeometry()
 
     //установка атрибутов геометрии
     customGeometry->addAttribute(positionAttribute);
+    customGeometry->addAttribute(heightAttribute);
     customGeometry->addAttribute(indexAttribute);
 
     //установка геометрии рендереру
