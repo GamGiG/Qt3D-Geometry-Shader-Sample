@@ -55,8 +55,8 @@ void Window3D::initScene()
 
     initLight();
     createBigPlane();
-    createRandomArrayCustomPlanes(100000);
-
+    createRandomArrayCustomPlanes(100);
+    createRandomArrayCustomWalls(100000);
 }
 
 void Window3D::initLight()
@@ -145,6 +145,23 @@ void Window3D::createRandomArrayCustomPlanes(int count)
     transform->setTranslation(QVector3D(0.0, 0.0, 0.0));
 
     customPlanes->addComponent(transform);
+}
+
+void Window3D::createRandomArrayCustomWalls(int count)
+{
+    CustomWalls* customWalls = new CustomWalls(count, sceneEntity);
+
+    if (WallsMaterial::Instance == nullptr) {
+        WallsMaterial* material = new WallsMaterial(nullptr);
+        customWalls->addComponent(material);
+    } else {
+        customWalls->addComponent(WallsMaterial::Instance);
+    }
+
+    Qt3DCore::QTransform* transform = new Qt3DCore::QTransform(customWalls);
+    transform->setTranslation(QVector3D(0.0, 0.0, 0.0));
+
+    customWalls->addComponent(transform);
 }
 
 void Window3D::initController()

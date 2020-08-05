@@ -6,6 +6,9 @@
         <file>Shaders/generate_forest_2.frag</file>
         <file>Shaders/generate_forest_2.glsl</file>
         <file>Shaders/generate_forest_2.vert</file>
+        <file>Shaders/generate_walls.frag</file>
+        <file>Shaders/generate_walls.glsl</file>
+        <file>Shaders/generate_walls.vert</file>
     </qresource>
     <qresource prefix="/Images">
         <file>Images/texture.png</file>

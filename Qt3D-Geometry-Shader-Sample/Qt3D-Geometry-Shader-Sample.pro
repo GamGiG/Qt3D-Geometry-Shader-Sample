@@ -30,7 +30,10 @@ SOURCES += \
     customplane.cpp \
     planematerial.cpp \
     planegeometryeffect.cpp \
-    customplanes.cpp
+    customplanes.cpp \
+    customwalls.cpp \
+    wallsgeometryeffect.cpp \
+    wallsmaterial.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +41,10 @@ HEADERS += \
     customplane.h \
     planegeometryeffect.h \
     planematerial.h \
-    customplanes.h
+    customplanes.h \
+    customwalls.h \
+    wallsgeometryeffect.h \
+    wallsmaterial.h
 
 FORMS += \
         mainwindow.ui
