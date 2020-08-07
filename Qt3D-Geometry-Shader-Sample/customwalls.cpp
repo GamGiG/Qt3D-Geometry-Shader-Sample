@@ -40,7 +40,6 @@ void CustomWalls::initCustomRandomWalls(int count)
 {
     for (int i = 0; i < count; i++) {
 
-        qDebug() << QString("%1 из %2").arg(i).arg(count);
         QVector2D center = generateRandomVector2D();
         QVector2D wh = generateRandomVector2D(0.5f) + QVector2D(0.6f, 0.6f);
         float h = generateRandomFloat(5.0f);
@@ -55,6 +54,20 @@ void CustomWalls::initCustomRandomWalls(int count)
         customWalls.insert(customWall2->getUUID(), customWall2);
         customWalls.insert(customWall3->getUUID(), customWall3);
     }
+}
+
+//add wall
+void CustomWalls::AddWall(CustomWall *wall)
+    customWalls.insert(wall->getUUID(), wall);
+    initGeometry();
+}
+
+void CustomWalls::AddWalls(QList<CustomWall *> walls)
+{
+    for (int i = 0; i < walls.count(); i++) {
+        customWalls.insert(walls[i]->getUUID(), walls[i]);
+    }
+    initGeometry();
 }
 
 void CustomWalls::initGeometry()
@@ -83,7 +96,6 @@ void CustomWalls::initGeometry()
         rawPointsData[i * count_floats_in_wall + 6] = customWall->getP1().y();
         rawPointsData[i * count_floats_in_wall + 7] = customWall->getH();
 
-        qDebug() << QString("RAW %1 из %2").arg(i).arg(count);
     }
 
     //INDEX
@@ -97,7 +109,11 @@ void CustomWalls::initGeometry()
         rawIndexData[i] = i;
     }
 
-    Qt3DRender::QGeometryRenderer *customRenderer = new Qt3DRender::QGeometryRenderer();
+    if (customRenderer != nullptr) {
+        delete customRenderer;
+    }
+
+    customRenderer = new Qt3DRender::QGeometryRenderer(this);
     Qt3DRender::QGeometry *customGeometry = new Qt3DRender::QGeometry(customRenderer);
 
     //вершинный и индексный буффер
@@ -108,7 +124,7 @@ void CustomWalls::initGeometry()
     indexBuffer->setData(indexData);
 
     //атрибут вершин
-    Qt3DRender::QAttribute *positionAttribute = new Qt3DRender::QAttribute();
+    Qt3DRender::QAttribute *positionAttribute = new Qt3DRender::QAttribute(customGeometry);
     positionAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
     positionAttribute->setBuffer(vertexBuffer);
     positionAttribute->setDataType(Qt3DRender::QAttribute::Float);
@@ -119,7 +135,7 @@ void CustomWalls::initGeometry()
     positionAttribute->setName(Qt3DRender::QAttribute::defaultPositionAttributeName());
 
     //атрибут высот
-    Qt3DRender::QAttribute *heightAttribute = new Qt3DRender::QAttribute();
+    Qt3DRender::QAttribute *heightAttribute = new Qt3DRender::QAttribute(customGeometry);
     heightAttribute->setAttributeType(Qt3DRender::QAttribute::VertexAttribute);
     heightAttribute->setBuffer(vertexBuffer);
     heightAttribute->setDataType(Qt3DRender::QAttribute::Float);
@@ -130,7 +146,7 @@ void CustomWalls::initGeometry()
     heightAttribute->setName("height");
 
     //атрибут индексов
-    Qt3DRender::QAttribute *indexAttribute = new Qt3DRender::QAttribute();
+    Qt3DRender::QAttribute *indexAttribute = new Qt3DRender::QAttribute(customGeometry);
     indexAttribute->setAttributeType(Qt3DRender::QAttribute::IndexAttribute);
     indexAttribute->setBuffer(indexBuffer);
     indexAttribute->setDataType(Qt3DRender::QAttribute::UnsignedInt);

@@ -44,6 +44,9 @@ class CustomWalls : public Qt3DCore::QEntity
 public:
     CustomWalls(int count = 100, Qt3DCore::QNode* parent = nullptr);
 
+    void AddWall(CustomWall* wall);
+    void AddWalls(QList<CustomWall*> walls);
+
     static QVector2D generateRandomVector2D(float max = 100.0f);
     static float generateRandomFloat(float max = 1.0f);
 private:
@@ -52,7 +55,7 @@ private:
 
     void initGeometry();
 
-
+    Qt3DRender::QGeometryRenderer *customRenderer = nullptr;
 };
 
 #endif // CUSTOMWALLS_H

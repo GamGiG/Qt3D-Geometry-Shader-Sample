@@ -14,9 +14,16 @@
    <string>Qt3D-Geometry-Shader-Sample</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Добавить 100</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

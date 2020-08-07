@@ -55,8 +55,8 @@ void Window3D::initScene()
 
     initLight();
     createBigPlane();
-    createRandomArrayCustomPlanes(100);
-    createRandomArrayCustomWalls(10000);
+    createRandomArrayCustomPlanes(10000);
+    createRandomArrayCustomWalls(10);
 }
 
 void Window3D::initLight()
@@ -149,7 +149,7 @@ void Window3D::createRandomArrayCustomPlanes(int count)
 
 void Window3D::createRandomArrayCustomWalls(int count)
 {
-    CustomWalls* customWalls = new CustomWalls(count, sceneEntity);
+    customWalls = new CustomWalls(count, sceneEntity);
 
     if (WallsMaterial::Instance == nullptr) {
         WallsMaterial* material = new WallsMaterial(nullptr);

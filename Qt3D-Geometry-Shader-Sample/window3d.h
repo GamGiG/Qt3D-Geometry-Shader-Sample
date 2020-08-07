@@ -32,6 +32,8 @@ public:
     Qt3DCore::QEntity* getRootEntity();
     Qt3DRender::QCamera* getCamera();
 
+    CustomWalls* customWalls;
+
 private:
     Qt3DRender::QCamera* defaultCamera;
     Qt3DCore::QEntity* rootEntity;
