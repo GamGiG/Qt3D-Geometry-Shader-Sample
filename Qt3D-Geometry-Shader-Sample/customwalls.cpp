@@ -58,6 +58,7 @@ void CustomWalls::initCustomRandomWalls(int count)
 
 //add wall
 void CustomWalls::AddWall(CustomWall *wall)
+{
     customWalls.insert(wall->getUUID(), wall);
     initGeometry();
 }
